@@ -1,0 +1,120 @@
+.container {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 20px;
+}
+
+header {
+	background-color: #d52b1e; /* Rojo */
+	color: #f5efef;
+	padding: 1px;
+	text-align: center;
+	background-image: linear-gradient(to right, #59dbc6, #1c861c);
+}
+
+nav ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+}
+
+nav li {
+	display: inline-block;
+	margin: 0 10px;
+}
+
+nav a {
+	display: inline-block;
+	background-color: #333;
+	color: #fff;
+	text-decoration: none;
+	padding: 10px 20px;
+	border-radius: 5px;
+}
+
+nav a:hover {
+	background-color: #fff;
+	color: #333;
+}
+
+
+
+
+.contenedor-padre {
+  display: flex;
+}
+
+.contenedor-izquierdo {
+  background-image: linear-gradient(to right,  #1c861c, #1ccc5f);
+  color: white;
+  margin-top: 60px;
+  margin-left: 60px;
+
+  width: 15%;
+  height:1000px;
+}
+
+
+
+.container {
+  margin: 10px;
+  width: 80%;
+}
+
+.contenedor-izquierdo input {
+  font-weight: bold;
+  font-size: 16px;
+  display: block;
+  margin-left: 10px;
+  margin-bottom: 1px;
+  width: 55%;
+}
+
+.contenedor-izquierdo label,
+.contenedor-izquierdo select {
+  font-weight: bold;
+  font-size: 16px;
+  display: block;
+  margin-left: 10px;
+
+
+}
+
+.contenedor-izquierdo select {
+  width: 55%;
+  padding: 5px;
+}
+
+.contenedor-izquierdo button {
+  color: white;
+  background-color: black;
+  margin-top: 10px;
+  margin-left: 60px;
+  border-radius: 5px;
+}
+
+.contenedor-izquierdo button:hover {
+   color: black;
+   background-color: white;
+}
+
+
+.contenido-producto {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+}
+
+.detalle {
+  text-align: center;
+  color: green;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.carro {
+  text-align: center;
+  color: green;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
