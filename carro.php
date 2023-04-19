@@ -34,7 +34,7 @@ if (isset($_POST['id_producto']) && isset($_POST['cantidad'])) {
 
 // Verificar si se recibió una solicitud de continuar comprando
 if (isset($_POST['continuar'])) {
-    header("Location: productos.php");
+    header("Location: index.php");
     exit;
 }
 
@@ -59,56 +59,58 @@ if (isset($_SESSION['carro']) && count($_SESSION['carro']) > 0) {
 
     // Calcular el total y mostrar los productos del carro
     $total = 0;
-    ?>
+?>
     <h2 class="carro"> CARRITO DE COMPRAS </h2>
     <div class="container">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Producto</th>
-            <th>Cantidad</th>
-            <th>Precio Unitario</th>
-            <th>Precio Total</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-    <?php
-    while ($fila = mysqli_fetch_assoc($resultado)) {
-        $id_producto = $fila['id_producto'];
-        $cantidad = $_SESSION['carro'][$id_producto]['cantidad'];
-        $precio_unitario = $fila['precio'];
-        $precio_total = $cantidad * $precio_unitario;
-        $total += $precio_total;
-        ?>
-          <tr>
-            <td><?php echo $fila['nombre']; ?></td>
-            <td><?php echo $cantidad; ?></td>
-            <td>$<?php echo $precio_unitario; ?></td>
-            <td>$<?php echo $precio_total; ?></td>
-            <td>
-              <a href="carro.php?accion=eliminar&id_producto=<?php echo $id_producto; ?>">Eliminar</a>
-</td>
-</tr>
-<?php
- }
- ?>
-<tr>
-<td colspan="3" align="right">Total:</td>
-<td>$<?php echo $total; ?></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unitario</th>
+                    <th><strong>Precio Total</strong></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                while ($fila = mysqli_fetch_assoc($resultado)) {
+                    $id_producto = $fila['id_producto'];
+                    $cantidad = $_SESSION['carro'][$id_producto]['cantidad'];
+                    $precio_unitario = $fila['precio'];
+                    $precio_total = $cantidad * $precio_unitario;
+                    $total += $precio_total;
+                ?>
+                    <tr>
+                        <td><?php echo $fila['nombre']; ?></td>
+                        <td><?php echo $cantidad; ?></td>
+                        <td>$<?php echo $precio_unitario; ?></td>
+                        <td>$<?php echo number_format($precio_total, 0, ',', '.'); ?></td>
+
+                        <td>
+                            <a href="carro.php?accion=eliminar&id_producto=<?php echo $id_producto; ?>">Eliminar</a>
+                        </td>
+                    </tr>
+                <?php
+                }
+                ?>
+                <tr>
+                    <td colspan="3" align="right"><strong>Total:</strong></td>
+                    <td>$<?php echo number_format($total, 2, '.', ','); ?></td>
+
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 <?php
 } else {
- // Si no hay productos en el carro, mostrar un mensaje
- ?>
-<h2 class="carro"> CARRITO DE COMPRAS </h2>
-<div class="container">
-<p>No hay productos en el carro.</p>
-</div>
+    // Si no hay productos en el carro, mostrar un mensaje
+?>
+    <h2 class="carro"> CARRITO DE COMPRAS </h2>
+    <div class="container">
+        <p>No hay productos en el carro.</p>
+    </div>
 <?php
 }
 
@@ -116,20 +118,19 @@ if (isset($_SESSION['carro']) && count($_SESSION['carro']) > 0) {
 ?>
 
 <div class="container">
-  <div class="row">
-    <div class="col-md-4">
-      <a class="btn btn-danger" href="carro.php?accion=vaciar">Vaciar Carro</a>
+    <div class="row">
+        <div class="col-md-4">
+            <a class="btn btn-danger" href="carro.php?accion=vaciar">Vaciar Carro</a>
+        </div>
+        <div class="col-md-4">
+            <form action="carro.php" method="POST">
+                <input type="submit" class="btn btn-primary" name="continuar" value="Continuar Comprando">
+            </form>
+        </div>
+        <div class="col-md-4">
+            <form action="carro.php" method="POST">
+                <input type="submit" class="btn btn-success" name="pagar" value="Ir a Pagar">
+            </form>
+        </div>
     </div>
-    <div class="col-md-4">
-      <form action="carro.php" method="POST">
-        <input type="submit" class="btn btn-primary" name="continuar" value="Continuar Comprando">
-      </form>
-    </div>
-    <div class="col-md-4">
-      <form action="carro.php" method="POST">
-        <input type="submit" class="btn btn-success" name="pagar" value="Ir a Pagar">
-      </form>
-    </div>
-  </div>
 </div>
-

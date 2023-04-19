@@ -16,19 +16,29 @@ $resultado = mysqli_query($con, $sql);
     <input type="text" name="busqueda" id="busqueda">
     <br>
     <label for="laboratorio">Laboratorio:</label>
-    <select name="laboratorio" id="laboratorio">
-      <option value="todos">Todos</option>
-      <option value="laboratorio1">Laboratorio 1</option>
-      <option value="laboratorio2">Laboratorio 2</option>
-      <option value="laboratorio3">Laboratorio 3</option>
-    </select>
-    <label for="farmacia">Nombre de farmacia:</label>
-    <select name="farmacia" id="farmacia">
-      <option value="todas">Todas</option>
-      <option value="farmacia1">Farmacia 1</option>
-      <option value="farmacia2">Farmacia 2</option>
-      <option value="farmacia3">Farmacia 3</option>
-      </select>
+<select name="laboratorio" id="laboratorio">
+  <option value="todos">Todos</option>
+  <?php
+    $query = "SELECT nombre FROM laboratorio";
+    $result = mysqli_query($con, $query);
+    while ($row = mysqli_fetch_assoc($result)) {
+      echo '<option value="' . $row['nombre'] . '">' . $row['nombre'] . '</option>';
+    }
+  ?>
+</select>
+
+<label for="farmacia">Nombre de farmacia:</label>
+<select name="farmacia" id="farmacia">
+  <option value="todas">Todas</option>
+  <?php
+    $query = "SELECT nombre_farmacia FROM farmacia";
+    $result = mysqli_query($con, $query);
+    while($row = mysqli_fetch_assoc($result)) {
+      echo "<option value='". $row['nombre_farmacia'] ."'>". $row['nombre_farmacia'] ."</option>";
+    }
+  ?>
+</select>
+
       <button type="submit" id="buscar-btn" disabled>Buscar</button>
       </form>
     </div>

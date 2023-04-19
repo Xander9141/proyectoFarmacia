@@ -118,3 +118,43 @@ nav a:hover {
   color: green;
   font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
+
+/* Estilos pagar.php */
+.tipopago {
+  display: flex;
+  justify-content: center;
+  
+}
+.tipopago {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+button {
+  background-color: #4CAF50; /* color de fondo */
+  color: white; /* color del texto */
+  padding: 12px 24px; /* tamaño del botón */
+  border: none; /* borde */
+  border-radius: 4px; /* esquinas redondeadas */
+  cursor: pointer; /* cursor al pasar el mouse */
+  transition: background-color 0.3s; /* transición al cambiar color de fondo */
+}
+
+button:hover {
+  background-color: #3e8e41; /* color de fondo al pasar el mouse */
+}
+
+.pago-tarjeta-credito {
+  background-color: #2196F3; /* color de fondo específico para tarjeta de crédito */
+}
+
+.pago-tarjeta-debito {
+  background-color: #FF9800; /* color de fondo específico para tarjeta de débito */
+}
+
+.pago-efectivo {
+  background-color: #F44336; /* color de fondo específico para pago en efectivo */
+}
