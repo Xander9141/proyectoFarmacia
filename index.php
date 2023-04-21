@@ -7,8 +7,11 @@ include('configuracion.php');
 $sql = "SELECT * FROM producto";
 $resultado = mysqli_query($con, $sql);
 ?>
-
+<div class="banner">
+<img src="imagenes/banner.jpg" alt="banner" class="banner">
+</div>
 <div class="contenedor-padre">
+   <div class="contenedor_izquierdo_fondo">
    <div class="contenedor-izquierdo">
     <h2>Filtros</h2>
   <form action="resultados.php" method="POST">
@@ -17,7 +20,7 @@ $resultado = mysqli_query($con, $sql);
     <br>
     <label for="laboratorio">Laboratorio:</label>
 <select name="laboratorio" id="laboratorio">
-  <option value="todos">Todos</option>
+  <option value="todos">Seleccione una opción</option>
   <?php
     $query = "SELECT nombre FROM laboratorio";
     $result = mysqli_query($con, $query);
@@ -27,11 +30,24 @@ $resultado = mysqli_query($con, $sql);
   ?>
 </select>
 
+
 <label for="farmacia">Nombre de farmacia:</label>
 <select name="farmacia" id="farmacia">
-  <option value="todas">Todas</option>
+  <option value="todas">Seleccione una opción</option>
   <?php
     $query = "SELECT nombre_farmacia FROM farmacia";
+    $result = mysqli_query($con, $query);
+    while($row = mysqli_fetch_assoc($result)) {
+      echo "<option value='". $row['nombre_farmacia'] ."'>". $row['nombre_farmacia'] ."</option>";
+    }
+  ?>
+</select>
+
+<label for="Delivery">Delivery:</label>
+<select name="delivery" id="delivery">
+  <option value="todas">Seleccione una opción</option>
+  <?php
+    $query = "SELECT nombre FROM tipo_despacho";
     $result = mysqli_query($con, $query);
     while($row = mysqli_fetch_assoc($result)) {
       echo "<option value='". $row['nombre_farmacia'] ."'>". $row['nombre_farmacia'] ."</option>";
@@ -42,13 +58,13 @@ $resultado = mysqli_query($con, $sql);
       <button type="submit" id="buscar-btn" disabled>Buscar</button>
       </form>
     </div>
-
+    </div>
 
 
 
 
     <div class="container">
-  <h2>Productos</h2></h2>
+  <h2>Nuestros productos:</h2>
   <div class="table-responsive">
     <table class="table table-striped table-bordered">
       <thead>

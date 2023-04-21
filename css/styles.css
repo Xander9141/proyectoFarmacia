@@ -1,16 +1,30 @@
-.container {
-	max-width: 1200px;
+/* Estilos generales */
+
+.container_header {
+	max-width: 2000px;
 	margin: 0 auto;
 	padding: 20px;
+  background-color: black;
 }
 
-header {
-	background-color: #d52b1e; /* Rojo */
-	color: #f5efef;
-	padding: 1px;
-	text-align: center;
-	background-image: linear-gradient(to right, #59dbc6, #1c861c);
+
+
+.content {
+  color: #f5efef;
+  padding: 1px;
+  text-align: center;
+  background-image: linear-gradient(to right, #59dbc6, #1c861c);
+  border-radius: 20px;
 }
+
+.logo {
+  position: absolute;
+  top: 40px;
+  left: 150px;
+  max-height: 80px;
+}
+
+
 
 nav ul {
 	list-style: none;
@@ -38,29 +52,47 @@ nav a:hover {
 	color: #333;
 }
 
+.banner {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+}
 
+.banner img {
+  display: block;
+  width: 100%;
+  height: 500px; /* Cambiar este valor a lo que necesites */
+}
 
 
 .contenedor-padre {
   display: flex;
 }
 
+.contenedor_izquierdo_fondo {
+  background-color: black;
+  margin-left: 40px;
+  margin-top: 50px;
+  margin-right: 0px;
+  width: 350px;
+
+}
+
 .contenedor-izquierdo {
   background-image: linear-gradient(to right,  #1c861c, #1ccc5f);
   color: white;
-  margin-top: 60px;
-  margin-left: 60px;
-
-  width: 15%;
-  height:1000px;
-}
-
-
-
-.container {
-  margin: 10px;
+  margin: auto;
   width: 80%;
+  height:800px;
+  border-radius: 20px;
 }
+
+.contenedor-izquierdo h2 {
+  margin-left: 20px;
+  margin-top: 60px;
+  margin-bottom: 50px;
+}
+
 
 .contenedor-izquierdo input {
   font-weight: bold;
@@ -68,7 +100,7 @@ nav a:hover {
   display: block;
   margin-left: 10px;
   margin-bottom: 1px;
-  width: 55%;
+  width: 80%;
 }
 
 .contenedor-izquierdo label,
@@ -82,7 +114,7 @@ nav a:hover {
 }
 
 .contenedor-izquierdo select {
-  width: 55%;
+  width: 80%;
   padding: 5px;
 }
 
@@ -99,6 +131,11 @@ nav a:hover {
    background-color: white;
 }
 
+/* estilo container proucto */
+.container {
+  margin-top: 25px;
+  width: 80%;
+}
 
 .contenido-producto {
   border: 1px solid #ccc;
@@ -106,6 +143,59 @@ nav a:hover {
   margin: 10px;
   text-align: center;
 }
+
+/* Tabla container_resultados */
+
+.container_resultados {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.table {
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.table th,
+.table td {
+  padding: 10px;
+  text-align: left;
+}
+
+.table th {
+  background-color: #e8e8e8;
+  font-weight: bold;
+}
+
+.table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.table tr:hover {
+  background-color: #e0e0e0;
+}
+
+.btn {
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+  cursor: pointer;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.btn i {
+  margin-right: 5px;
+}
+
+
+
+/* estilo detalle.php */
+
 
 .detalle {
   text-align: center;
@@ -118,6 +208,14 @@ nav a:hover {
   color: green;
   font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
+
+
+
+/* Estilos catalogo.php */
+.row {
+    margin: 0 auto;
+    text-align: left;
+  }
 
 /* Estilos pagar.php */
 .tipopago {

@@ -44,8 +44,28 @@ if (isset($_POST['pagar'])) {
     exit;
 }
 
+// Verificar si se recibió una solicitud de cambiar el tipo de envío
+if (isset($_POST['envio'])) {
+    $_SESSION['tipo_envio'] = $_POST['envio'];
+}
+
 include('configuracion.php');
 include('header.php');
+?>
+<form id="envio-form" method="POST">
+    <label for="envio">Seleccione el tipo de envío:</label><br>
+    <input type="radio" id="delivery" name="envio" value="1" onchange="document.getElementById('envio-form').submit()">
+    <label for="delivery">Delivery</label><br>
+    <input type="radio" id="tienda" name="envio" value="2" onchange="document.getElementById('envio-form').submit()">
+    <label for="tienda">Retiro en tienda</label><br><br>
+</form>
+
+<?php
+// Verificar si se recibió una solicitud de cambiar el tipo de envío
+if (isset($_POST['envio'])) {
+    $_SESSION['tipo_envio'] = $_POST['envio'];
+}
+
 
 // Verificar si hay productos en el carro
 if (isset($_SESSION['carro']) && count($_SESSION['carro']) > 0) {
@@ -54,83 +74,31 @@ if (isset($_SESSION['carro']) && count($_SESSION['carro']) > 0) {
 
     // Obtener los detalles de los productos del carro
     $sql = "SELECT * FROM producto WHERE id_producto IN (" . implode(",", array_map('intval', $ids_productos)) . ")";
+    $result = mysqli_query($con, $sql);
+// Inicializar el total del carro
+$total = 0;
 
-    $resultado = mysqli_query($con, $sql);
+// Imprimir la tabla de productos del carro
+echo "<table class='table'><thead><tr><th>Producto</th><th>Precio</th><th>Cantidad</th><th>Total</th></tr></thead><tbody>";
+while ($row = mysqli_fetch_assoc($result)) {
+    $id_producto = $row['id_producto'];
+    $nombre = $row['nombre'];
+    $precio = $row['precio'];
+    $cantidad = $_SESSION['carro'][$id_producto]['cantidad'];
+    $subtotal = $precio * $cantidad;
+    $total += $subtotal;
 
-    // Calcular el total y mostrar los productos del carro
-    $total = 0;
-?>
-    <h2 class="carro"> CARRITO DE COMPRAS </h2>
-    <div class="container">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Producto</th>
-                    <th>Cantidad</th>
-                    <th>Precio Unitario</th>
-                    <th><strong>Precio Total</strong></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                while ($fila = mysqli_fetch_assoc($resultado)) {
-                    $id_producto = $fila['id_producto'];
-                    $cantidad = $_SESSION['carro'][$id_producto]['cantidad'];
-                    $precio_unitario = $fila['precio'];
-                    $precio_total = $cantidad * $precio_unitario;
-                    $total += $precio_total;
-                ?>
-                    <tr>
-                        <td><?php echo $fila['nombre']; ?></td>
-                        <td><?php echo $cantidad; ?></td>
-                        <td>$<?php echo $precio_unitario; ?></td>
-                        <td>$<?php echo number_format($precio_total, 0, ',', '.'); ?></td>
-
-                        <td>
-                            <a href="carro.php?accion=eliminar&id_producto=<?php echo $id_producto; ?>">Eliminar</a>
-                        </td>
-                    </tr>
-                <?php
-                }
-                ?>
-                <tr>
-                    <td colspan="3" align="right"><strong>Total:</strong></td>
-                    <td>$<?php echo number_format($total, 2, '.', ','); ?></td>
-
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-<?php
-} else {
-    // Si no hay productos en el carro, mostrar un mensaje
-?>
-    <h2 class="carro"> CARRITO DE COMPRAS </h2>
-    <div class="container">
-        <p>No hay productos en el carro.</p>
-    </div>
-<?php
+    echo "<tr><td>$nombre</td><td>$precio</td><td>$cantidad</td><td>$subtotal</td></tr>";
 }
+echo "</tbody><tfoot><tr><td colspan='3'><strong>Total:</strong></td><td><strong>$total</strong></td></tr></tfoot></table>";
 
-// Mostrar botones para vaciar el carro, continuar comprando o ir a pagar
-?>
+// Imprimir el botón de vaciar carro y los botones de continuar comprando y pagar
+echo "<a href='carro.php?accion=vaciar' class='btn btn-danger'>Vaciar carro</a>";
+echo "<form action='carro.php' method='POST'><input type='submit' class='btn btn-primary' name='continuar' value='Continuar comprando'>";
+echo "<input type='submit' class='btn btn-success' name='pagar' value='Ir a pagar'></form>";
+} else {
+    echo "<p>No hay productos en el carro.</p>";
+    }
+    
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-4">
-            <a class="btn btn-danger" href="carro.php?accion=vaciar">Vaciar Carro</a>
-        </div>
-        <div class="col-md-4">
-            <form action="carro.php" method="POST">
-                <input type="submit" class="btn btn-primary" name="continuar" value="Continuar Comprando">
-            </form>
-        </div>
-        <div class="col-md-4">
-            <form action="carro.php" method="POST">
-                <input type="submit" class="btn btn-success" name="pagar" value="Ir a Pagar">
-            </form>
-        </div>
-    </div>
-</div>
+    ?>
